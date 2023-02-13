@@ -8,9 +8,6 @@
         Bmp,
         Tiff,
         Svg,
-#if !NET5_0 || NET5_0_WINDOWS
-        Xaml,
-#endif
         Ps,
         Eps,
     }

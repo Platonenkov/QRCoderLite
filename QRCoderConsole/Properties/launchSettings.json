@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "QRCoderConsole": {
+      "commandName": "Project",
+      "commandLineArgs": "-o test.svg\r\n-d #FFFFFF\r\n-l #000000\r\n-f Svg\r\n-p 79652370727"
+    }
+  }
+}

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using NDesk.Options;
 using QRCoderConsole.DataObjects;
 using QRCoder;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Markup;
 
 namespace QRCoderConsole
@@ -14,7 +16,17 @@ namespace QRCoderConsole
 #endif
     class MainClass
     {
-        public static void Main (string[] args)
+        static void test()
+        {
+
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode("911", QRCodeGenerator.ECCLevel.M);
+            using QRCode qrCode = new QRCode(qrCodeData);
+            using var qrCodeAsBitmap = qrCode.GetGraphic(20, Color.Black, Color.White, (Bitmap)Bitmap.FromFile("test.png"), 14, 1);
+            var actualFormat = new OptionSetter().GetImageFormat("png");
+            qrCodeAsBitmap.Save("outputFileName.png", actualFormat);
+        }
+        public static async Task Main (string[] args)
         {
             var friendlyName = AppDomain.CurrentDomain.FriendlyName;
             var newLine = Environment.NewLine;
@@ -123,81 +135,64 @@ namespace QRCoderConsole
 
                 if (text != null)
                 {
-                    GenerateQRCode(text, eccLevel, outputFileName, imageFormat, pixelsPerModule, foregroundColor, backgroundColor);
+                    await GenerateQRCode(text, eccLevel, outputFileName, imageFormat, pixelsPerModule, foregroundColor, backgroundColor);
                 }
             }
             catch (Exception oe)
             {
-                Console.Error.WriteLine(
+                await Console.Error.WriteLineAsync(
                     $"{friendlyName}:{newLine}{oe.GetType().FullName}{newLine}{oe.Message}{newLine}{oe.StackTrace}{newLine}Try '{friendlyName} --help' for more information");
                 Environment.Exit(-1);
             }
         }
 
-        private static void GenerateQRCode(string payloadString, QRCodeGenerator.ECCLevel eccLevel, string outputFileName, SupportedImageFormat imgFormat, int pixelsPerModule, string foreground, string background)
+        private static async Task GenerateQRCode(string payloadString, QRCodeGenerator.ECCLevel eccLevel, string outputFileName, SupportedImageFormat imgFormat, 
+            int pixelsPerModule, string foreground, string background)
         {
-            using (var generator = new QRCodeGenerator())
+            using var generator = new QRCodeGenerator();
+            using var data = generator.CreateQrCode(payloadString, eccLevel);
+            switch (imgFormat)
             {
-                using (var data = generator.CreateQrCode(payloadString, eccLevel))
-                {
-                    switch (imgFormat)
+                case SupportedImageFormat.Png:
+                case SupportedImageFormat.Jpg:
+                case SupportedImageFormat.Gif:
+                case SupportedImageFormat.Bmp:
+                case SupportedImageFormat.Tiff:
+                    using (var code = new QRCode(data))
                     {
-                        case SupportedImageFormat.Png:
-                        case SupportedImageFormat.Jpg:
-                        case SupportedImageFormat.Gif:
-                        case SupportedImageFormat.Bmp:
-                        case SupportedImageFormat.Tiff:
-                            using (var code = new QRCode(data))
-                            {
-                                using (var bitmap = code.GetGraphic(pixelsPerModule, foreground, background, true))
-                                {
-                                    var actualFormat = new OptionSetter().GetImageFormat(imgFormat.ToString());
-                                    bitmap.Save(outputFileName, actualFormat);
-                                }
-                            }
-                            break;
-                        case SupportedImageFormat.Svg:
-                            using (var code = new SvgQRCode(data))
-                            {
-                                var test = code.GetGraphic(pixelsPerModule, foreground, background, true);
-                                using (var f = File.CreateText(outputFileName))
-                                {
-                                    f.Write(test);
-                                    f.Flush();
-                                }
-                            }
-                            break;
-#if NETFRAMEWORK || NET5_0_WINDOWS || NET6_0_WINDOWS
-                        case SupportedImageFormat.Xaml:
-                            using (var code = new QRCoder.Xaml.XamlQRCode(data))
-                            {
-                                var test = XamlWriter.Save(code.GetGraphic(pixelsPerModule, foreground, background, true));
-                                using (var f = File.CreateText(outputFileName))
-                                {
-                                    f.Write(test);
-                                    f.Flush();
-                                }
-                            }
-                            break;
-#endif
-                        case SupportedImageFormat.Ps:
-                        case SupportedImageFormat.Eps:
-                            using (var code = new PostscriptQRCode(data))
-                            {
-                                var test = code.GetGraphic(pixelsPerModule, foreground, background, true,
-                                    imgFormat == SupportedImageFormat.Eps);
-                                using (var f = File.CreateText(outputFileName))
-                                {
-                                    f.Write(test);
-                                    f.Flush();
-                                }
-                            }
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException(nameof(imgFormat), imgFormat, null);
+                        using (var bitmap = code.GetGraphic(pixelsPerModule, foreground, background, true))
+                        {
+                            var actualFormat = new OptionSetter().GetImageFormat(imgFormat.ToString());
+                            bitmap.Save(outputFileName, actualFormat);
+                        }
                     }
-
-                }
+                    break;
+                case SupportedImageFormat.Svg:
+                    using (var code = new SvgQRCode(data))
+                    {
+                        var test = code.GetGraphic(pixelsPerModule, foreground, background, true);
+                        await using (var f = File.CreateText(outputFileName))
+                        {
+                            await f.WriteAsync(test);
+                            await f.FlushAsync();
+                        }
+                    }
+                    break;
+                case SupportedImageFormat.Ps:
+                case SupportedImageFormat.Eps:
+                    using (var code = new PostscriptQRCode(data))
+                    {
+                        var test = code.GetGraphic(pixelsPerModule, foreground, background, true,
+                            imgFormat == SupportedImageFormat.Eps);
+                        await using (var f = File.CreateText(outputFileName))
+                        {
+                            await f.WriteAsync(test);
+                            await f.FlushAsync();
+                        }
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(imgFormat), imgFormat, null);
             }
         }
 

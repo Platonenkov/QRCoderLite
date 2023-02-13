@@ -1,17 +1,13 @@
-#if NETFRAMEWORK || NETSTANDARD2_0 || NET5_0 || NET6_0_WINDOWS
 
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using static QRCoder.ArtQRCode;
-using static QRCoder.QRCodeGenerator;
+using static QRCoderLite.ArtQRCode;
+using static QRCoderLite.QRCodeGenerator;
 
 // pull request raised to extend library used. 
-namespace QRCoder
+namespace QRCoderLite
 {
-#if NET6_0_WINDOWS
-    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-#endif
     public class ArtQRCode : AbstractQRCode, IDisposable
     {
         /// <summary>
@@ -257,9 +253,6 @@ namespace QRCoder
         }
     }
 
-#if NET6_0_WINDOWS
-    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-#endif
     public static class ArtQRCodeHelper
     {
         /// <summary>
@@ -294,5 +287,3 @@ namespace QRCoder
         }
     }
 }
-
-#endif

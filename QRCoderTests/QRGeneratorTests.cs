@@ -1,12 +1,12 @@
-﻿using QRCoder;
-using QRCoderTests.Helpers.XUnitExtenstions;
-using Shouldly;
+﻿using Shouldly;
 using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
 using System.Linq;
 using System.Collections;
 using System.Text;
+using QRCoderLite;
+using QRCoderTests.Helpers;
 
 namespace QRCoderTests
 {

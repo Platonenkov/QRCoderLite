@@ -1,14 +1,10 @@
-﻿#if NETFRAMEWORK || NETSTANDARD2_0 || NET5_0 || NET6_0_WINDOWS
-using System;
+﻿using System;
 using System.Drawing;
-using static QRCoder.QRCodeGenerator;
+using static QRCoderLite.QRCodeGenerator;
 
-namespace QRCoder
+namespace QRCoderLite
 {
 
-#if NET6_0_WINDOWS
-    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-#endif
     public class PostscriptQRCode : AbstractQRCode, IDisposable
     {
         /// <summary>
@@ -143,9 +139,6 @@ showpage
 ";
     }
 
-#if NET6_0_WINDOWS
-    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-#endif
     public static class PostscriptQRCodeHelper
     {
         public static string GetQRCode(string plainText, int pointsPerModule, string darkColorHex, string lightColorHex, ECCLevel eccLevel, bool forceUtf8 = false, bool utf8BOM = false, EciMode eciMode = EciMode.Default, int requestedVersion = -1, bool drawQuietZones = true, bool epsFormat = false)
@@ -157,5 +150,3 @@ showpage
         }
     }
 }
-
-#endif

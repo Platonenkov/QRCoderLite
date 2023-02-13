@@ -1,7 +1,7 @@
-﻿using Xunit;
-using QRCoder;
+﻿using QRCoderLite;
+using QRCoderTests.Helpers;
+using Xunit;
 using Shouldly;
-using QRCoderTests.Helpers.XUnitExtenstions;
 
 
 namespace QRCoderTests

@@ -1,12 +1,11 @@
 ﻿#if !NETCOREAPP1_1 && !NET6_0
 using System;
 using Xunit;
-using QRCoder;
 using Shouldly;
-using QRCoderTests.Helpers.XUnitExtenstions;
 using System.IO;
 using QRCoderTests.Helpers;
 using System.Drawing;
+using QRCoderLite;
 
 
 namespace QRCoderTests
@@ -15,15 +14,8 @@ namespace QRCoderTests
     public class SvgQRCodeRendererTests
     {
 
-        private string GetAssemblyPath()
-        {
-            return
-#if NET5_0
-                AppDomain.CurrentDomain.BaseDirectory;
-#else
-                Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).Replace("file:\\", "");
-#endif
-        }
+        private static string GetAssemblyPath() 
+            => Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location).Replace("file:\\", "");
 
         [Fact]
         [Category("QRRenderer/SvgQRCode")]

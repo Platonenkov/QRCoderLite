@@ -1,14 +1,10 @@
-#if NETFRAMEWORK || NETSTANDARD2_0 || NET5_0 || NET6_0_WINDOWS
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using static QRCoder.QRCodeGenerator;
+using static QRCoderLite.QRCodeGenerator;
 
-namespace QRCoder
+namespace QRCoderLite
 {
-#if NET6_0_WINDOWS
-    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-#endif
     public class QRCode : AbstractQRCode, IDisposable
     {
         /// <summary>
@@ -128,9 +124,6 @@ namespace QRCoder
         }
     }
 
-#if NET6_0_WINDOWS
-    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-#endif
     public static class QRCodeHelper
     {
         public static Bitmap GetQRCode(string plainText, int pixelsPerModule, Color darkColor, Color lightColor, ECCLevel eccLevel, bool forceUtf8 = false, bool utf8BOM = false, EciMode eciMode = EciMode.Default, int requestedVersion = -1, Bitmap icon = null, int iconSizePercent = 15, int iconBorderWidth = 0, bool drawQuietZones = true)
@@ -142,5 +135,3 @@ namespace QRCoder
         }
     }
 }
-
-#endif

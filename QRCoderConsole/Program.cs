@@ -4,10 +4,10 @@ using System.Drawing.Imaging;
 using System.IO;
 using NDesk.Options;
 using QRCoderConsole.DataObjects;
-using QRCoder;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
+using QRCoderLite;
 
 namespace QRCoderConsole
 {

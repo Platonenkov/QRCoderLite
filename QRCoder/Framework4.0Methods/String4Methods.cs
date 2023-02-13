@@ -1,6 +1,6 @@
 using System;
 
-namespace QRCoder
+namespace QRCoderLite.Framework4._0Methods
 {
     internal static class String40Methods
     {

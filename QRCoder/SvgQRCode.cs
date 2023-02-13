@@ -1,19 +1,13 @@
-#if NETFRAMEWORK || NETSTANDARD2_0 || NET5_0 || NET6_0_WINDOWS
-using QRCoder.Extensions;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using System.Text.RegularExpressions;
-using static QRCoder.QRCodeGenerator;
-using static QRCoder.SvgQRCode;
+using QRCoderLite.Extensions;
+using static QRCoderLite.QRCodeGenerator;
+using static QRCoderLite.SvgQRCode;
 
-namespace QRCoder
+namespace QRCoderLite
 {
-#if NET6_0_WINDOWS
-    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-#endif
     public class SvgQRCode : AbstractQRCode, IDisposable
     {
         /// <summary>
@@ -393,5 +387,3 @@ namespace QRCoder
         }
     }
 }
-
-#endif

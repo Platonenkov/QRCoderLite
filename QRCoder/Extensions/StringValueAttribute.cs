@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
-namespace QRCoder.Extensions
+namespace QRCoderLite.Extensions
 {
     /// <summary>
     /// Used to represent a string value for a value in an enum
@@ -40,11 +36,7 @@ namespace QRCoder.Extensions
         /// <returns></returns>
         public static string GetStringValue(this Enum value)
         {            
-#if NETSTANDARD1_3
-            var fieldInfo = value.GetType().GetRuntimeField(value.ToString());
-#else
             var fieldInfo = value.GetType().GetField(value.ToString());
-#endif
             var attr = fieldInfo.GetCustomAttributes(typeof(StringValueAttribute), false) as StringValueAttribute[];
             return attr.Length > 0 ? attr[0].StringValue : null;
         }

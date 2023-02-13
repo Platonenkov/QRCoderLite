@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-#if !NET35 && !NET452
 using Xunit.Abstractions;
-#endif
 using Xunit.Sdk;
+#if !NET35 && !NET452
+#endif
 
-namespace QRCoderTests.Helpers.XUnitExtenstions
+namespace QRCoderTests.Helpers
 {
 #if NET35 || NET452
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]

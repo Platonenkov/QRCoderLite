@@ -1,10 +1,9 @@
 ﻿#if !NETCOREAPP1_1 && !NET6_0
 
 using Xunit;
-using QRCoder;
 using Shouldly;
 using System.Drawing;
-using QRCoderTests.Helpers.XUnitExtenstions;
+using QRCoderLite;
 using QRCoderTests.Helpers;
 
 namespace QRCoderTests

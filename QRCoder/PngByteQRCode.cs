@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using static QRCoder.QRCodeGenerator;
+using static QRCoderLite.QRCodeGenerator;
 
-namespace QRCoder
+namespace QRCoderLite
 {
     public sealed class PngByteQRCode : AbstractQRCode, IDisposable
     {
@@ -235,11 +235,7 @@ namespace QRCoder
 
                     // Compressed data.
                     idatStream.Position = 0;
-#if NET35
-                    idatStream.WriteTo(this.stream);
-#else
                     idatStream.CopyTo(this.stream);
-#endif
                     // Deflate checksum.
                     var adler = Adler32(scanlines, 0, scanlines.Length);
                     this.WriteIntBigEndian(adler);

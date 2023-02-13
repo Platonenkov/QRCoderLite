@@ -17,6 +17,6 @@
   <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
     <PackageReference Include="NDesk.Options.Core" Version="1.2.5" />
-    <ProjectReference Include="..\QRCoder\QRCoder.csproj" />	
+    <ProjectReference Include="..\QRCoder\QRCoderLite.csproj" />	
   </ItemGroup>
 </Project>

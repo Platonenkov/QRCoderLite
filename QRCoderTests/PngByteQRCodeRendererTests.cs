@@ -1,7 +1,6 @@
-﻿using Xunit;
-using QRCoder;
+﻿using QRCoderLite;
+using Xunit;
 using Shouldly;
-using QRCoderTests.Helpers.XUnitExtenstions;
 using QRCoderTests.Helpers;
 #if !NETCOREAPP1_1
 using System.Drawing;

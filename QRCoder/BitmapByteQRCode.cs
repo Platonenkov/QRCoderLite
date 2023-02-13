@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static QRCoder.QRCodeGenerator;
+using static QRCoderLite.QRCodeGenerator;
 
-namespace QRCoder
+namespace QRCoderLite
 {
 
     // ReSharper disable once InconsistentNaming

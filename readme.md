@@ -1,10 +1,9 @@
-# QRCoder
+## Installation
 
-|Build|Code coverage|Build status|NuGet Package|
-|-----|-------------|------------|-------------|
-|Latest / Stable|[![codecov](https://codecov.io/gh/codebude/QRCoder/branch/master/graph/badge.svg?token=3yNs88KD8S)](https://codecov.io/gh/codebude/QRCoder)|[![Build, test, pack, push (Release)](https://github.com/codebude/QRCoder/actions/workflows/wf-build-release.yml/badge.svg?branch=master)](https://github.com/codebude/QRCoder/actions/workflows/wf-build-release.yml)|[![NuGet Badge](https://buildstats.info/nuget/QRCoder?rnd=0892982314)](https://www.nuget.org/packages/QRCoder/)|
-|CI / Last commit|[![codecov](https://codecov.io/gh/codebude/QRCoder/branch/master/graph/badge.svg?token=3yNs88KD8S)](https://codecov.io/gh/codebude/QRCoder)|[![Build, test, pack, push (CI)](https://github.com/codebude/QRCoder/actions/workflows/wf-build-release-ci.yml/badge.svg)](https://github.com/codebude/QRCoder/actions/workflows/wf-build-release-ci.yml)|[![Github packages](https://img.shields.io/badge/Github-Packages-blue)](https://github.com/codebude/qrcoder/packages)|
-
+Either checkout this Github repository or install QRCoder via NuGet Package Manager. If you want to use NuGet just search for "QRCoder" or run the following command in the NuGet Package Manager console:
+```bash
+PM> Install-Package QRCoderLite
+```
 
 ## Info
 
@@ -25,13 +24,6 @@ QRCoder is a project by [Raffael Herrmann](https://raffaelherrmann.de) and was f
 
 * * *
 
-
-## Installation
-
-Either checkout this Github repository or install QRCoder via NuGet Package Manager. If you want to use NuGet just search for "QRCoder" or run the following command in the NuGet Package Manager console:
-```bash
-PM> Install-Package QRCoder
-```
 
 #### CI builds
 The NuGet feed contains only **major/stable** releases. If you want the latest functions and features, you can use the CI builds [via Github packages](https://github.com/codebude/qrcoder/packages).

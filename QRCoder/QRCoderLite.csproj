@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <None Include="Assets\nuget-readme.md" Pack="true" PackagePath="\" />
+    <None Include="Assets\nuget-icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
